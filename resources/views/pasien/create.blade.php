@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="no_telepon" class="col-sm-2 col-form-label">No. Telepon</label>
-                                <input type="number" class="col-sm-8 form-control @error('no_telepon') is-invalid @enderror" id="no_telepon" name="no_telepon" {{ old('no_telepon') }}>
+                                <input type="text" class="col-sm-8 form-control @error('no_telepon') is-invalid @enderror" id="no_telepon" name="no_telepon" {{ old('no_telepon') }}>
                                 <div class="invalid-feedback text-center">
                                     @error('no_telepon')
                                         {{ $message }}

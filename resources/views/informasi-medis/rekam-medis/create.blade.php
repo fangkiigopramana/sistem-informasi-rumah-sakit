@@ -28,11 +28,11 @@
                         <div class="container mt-3 mb-3">
                             <div class="form-group row">
                                 <label for="pasien_id" class="col-sm-3 col-form-label">Nama Pasien</label>
-                                <select class="custom-select col-sm-8 form-control @error('pasien_id') is-invalid @enderror" id="pasien_id" name="pasien_id">
-                                    <option selected value="{{ $pasien[0]->pasien_id}}">{{ $pasien[0]->pasien_nama }}</option>
-                                    <?php foreach($pasien->skip(1) as $p) : ?>
-                                        <option value="{{ $p->pasien_id }}">{{ $p->pasien_nama }}</option>
-                                    <?php endforeach; ?>
+                                <select class="custom-select col-sm-8 form-control @error('pasien_id') is-invalid @enderror" id="pasien_id" name="pasien_id" required>
+                                    <option selected value=" ">-- Pilih nama pasien --</option>
+                                    @foreach ($pasien as $p)
+                                    <option value="{{ $p->pasien_id }}">{{ $p->pasien_nama }}</option>
+                                    @endforeach
                                 </select>
                                 <div class="invalid-feedback text-center">
                                     @error('pasien_id')
@@ -51,11 +51,11 @@
                             </div>
                             <div class="form-group row">
                                 <label for="dokter_id" class="col-sm-3 col-form-label">Nama Dokter Pemeriksa</label>
-                                <select class="custom-select col-sm-8 form-control @error('dokter_id') is-invalid @enderror" id="dokter_id" name="dokter_id">
-                                    <option selected value="{{ $dokter[0]->dokter_id }}">{{ $dokter[0]->dokter_nama }}</option>
-                                    <?php foreach($dokter->skip(1) as $d) : ?>
-                                        <option value="{{ $d->dokter_id }}">{{ $d->dokter_nama }}</option>
-                                    <?php endforeach; ?>
+                                <select class="custom-select col-sm-8 form-control @error('dokter_id') is-invalid @enderror" id="dokter_id" name="dokter_id" required>
+                                    <option selected value=" ">-- Pilih nama dokter --</option>
+                                    @foreach ($dokter as $d)
+                                    <option value="{{ $d->dokter_id }}">{{ $d->dokter_nama }}</option>
+                                    @endforeach
                                 </select>
                                 <div class="invalid-feedback text-center">
                                     @error('dokter_id')

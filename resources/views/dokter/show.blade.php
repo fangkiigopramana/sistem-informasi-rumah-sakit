@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="nama" name="nama" value="{{ $dokter->nama }}" readonly>
+                                <input type="email" class="form-control" id="nama" name="nama" value="{{ $dokter->dokter_nama }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -45,13 +45,13 @@
                         <div class="form-group row">
                             <label for="jenisKelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="jenisKelamin" name="jenisKelamin" value="{{ $dokter->jenisKelamin }}" readonly>
+                                <input type="email" class="form-control" id="jenisKelamin" name="jenisKelamin" value="{{ $dokter->jenis_kelamin }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="noTelepon" class="col-sm-2 col-form-label">No. Telepon</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="noTelepon" name="noTelepon" value="{{ $dokter->noTelepon }}" readonly>
+                                <input type="email" class="form-control" id="noTelepon" name="noTelepon" value="{{ $dokter->no_telepon }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">

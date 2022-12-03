@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     public function show()
     {
+        // $countPasien = DB::select('select count(*) as sum from pasiens');
         $countPasien = Pasien::get()->count();
         $countDokter = Dokter::get()->count();
         $countRekamMedis = Dokter::get()->count();
@@ -26,6 +27,9 @@ class DashboardController extends Controller
 
         $jenisKelaminPria = $dokterPria;
         $jenisKelaminPerempuan = $dokterPerempuan;
-        return view('dashboard.index', compact('full_name','countRekamMedis','countPasien', 'countDokter', 'jenisKelaminPria', 'jenisKelaminPerempuan'));
+        // dd($countPasien);
+        return view('dashboard.index', 
+        compact('full_name','countRekamMedis','countPasien', 'countDokter', 'jenisKelaminPria', 'jenisKelaminPerempuan')
+    );
     }
 }

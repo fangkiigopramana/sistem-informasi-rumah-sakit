@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataRekamMedisController;
 use App\Models\DataRekamMedis;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,11 +53,15 @@ Route::controller(DokterController::class)->group(function () {
 
 Route::controller(DataRekamMedisController::class)->group(function () {
     Route::get('/rekam-medis', 'index')->middleware('auth');
+    Route::get('/rekam-medis/create', 'create')->middleware('auth');
+    Route::post('/rekam-medis', 'store')->middleware('auth');
     Route::get('/rekam-medis/trashed', 'trashed')->middleware('auth');
     Route::get('/rekam-medis/{dataRekamMedis:id}', 'show')->middleware('auth');
-    Route::get('/rekam-medis/{dataRekamMedis:id}/edit', 'edit')->middleware('auth');
+    Route::get('/rekam-medis/edit/{dataRekamMedis:id}', 'edit')->middleware('auth');
     Route::post('/rekam-medis/{dataRekamMedis:id}', 'update')->middleware('auth');
-    Route::delete('/rekam-medis/{dataRekamMedis:id}', 'destroy')->middleware('auth');
+    Route::delete('/rekam-medis/hapus-sementara/{dataRekamMedis:id}', 'softDelete')->middleware('auth');
+    Route::delete('/rekam-medis/hapus-permanen/{dataRekamMedis:id}', 'hardDelete')->middleware('auth');
+    Route::delete('/rekam-medis/restore/{dataRekamMedis:id}', 'restore')->middleware('auth');
 });
 
 //login
@@ -82,3 +87,19 @@ Route::get('/contoh-doang', function(){
 // Route::resource('/rekam-medis', DataRekamMedisController::class)->except([
     //     'show', 'edit', 'update', 'destroy', 'trashed'
     // ])->middleware('auth');
+
+
+// testing hardDelete
+// Route::delete('/rekam-medis/hapus-permanen/{dataRekamMedis:id}', function ($id)
+//     {
+//         // dd($id);
+      
+//         DB::delete('delete from data_rekam_medis where id = ?',[
+//             $id
+//         ]);
+//         dd('berhasil dihapus gan');
+//         // DataRekamMedis::destroy($dataRekamMedis->id);
+
+//         return redirect('/rekam-medis')->with('success', 'Yee, Data rekam medis berhasil dihapus!');
+//     }
+// )->middleware('auth');

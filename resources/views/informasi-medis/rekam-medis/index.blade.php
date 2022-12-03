@@ -12,17 +12,21 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800 font-weight-bold"><i class="fas fa-poll-h"></i> Data Rekam Medis</h1>
                 <div class="d-flex mb-2 justify-content-end">
-                    <a href="/rekam-medis/create" class="btn btn-success btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah Data</span>
-                    </a>
+                    @if (Request::is('rekam-medis')) 
+                        <a href="/rekam-medis/create" class="btn btn-success btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span class="text">Tambah Data</span>
+                        </a>
+                    @endif
+                    
                     @if (Request::is('rekam-medis/trashed'))
                         
                     <a href="/rekam-medis" class="btn btn-info btn-icon-split ml-2">
                         <span class="icon text-white-50">
-                            <i class="fas fa-trash"></i>
+                            {{-- <i class="fas fa-trash"></i> --}}
+                            <i class="fas fa-save"></i>
                         </span>
                         <span class="text">Data Tersimpan</span>
                     </a>
@@ -30,7 +34,8 @@
                         
                     <a href="/rekam-medis/trashed" class="btn btn-warning btn-icon-split ml-2">
                         <span class="icon text-white-50">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-list-alt"></i>
+                            {{-- <i class="fa-solid fa-trash-list"></i> --}}
                         </span>
                         <span class="text">Data Terhapus</span>
                     </a>
@@ -76,19 +81,56 @@
                                 @foreach ($rekamMedis as $rm)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $rm->created_at->format('l, d M Y') }}</td>
-                                        <td>{{ $rm->pasien->pasien_nama }}</td>
+                                        <td>{{ $rm->created_at }}</td>
+                                        {{-- <td>{{ DB::select('select pasien_nama from pasiens where pasien_id = :pasien_id',['pasien_id' => '1']) }}</td> --}}
+                                        {{-- <td>{{ $rm->pasien->pasien_nama }}</td> --}}
+                                        <td>{{ $rm->pasien_id }}</td>
                                         <td>{{ $rm->keluhan }}</td>
-                                        <td>{{ $rm->dokter->dokter_nama }}</td>
+                                        <td>{{ $rm->dokter_id }}</td>
+                                        {{-- <td>{{ $rm->dokter->dokter_nama }}</td> --}}
                                         <td>{{ $rm->diagnosis }}</td>
-                                        <td>
+                                        <td class="col-md-3">
+                                            
                                             <a href="/rekam-medis/{{ $rm->id }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="/rekam-medis/{{ $rm->id }}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                            <form action="/rekam-medis/{{ $rm->id }}" method="post" class="d-inline">
+                                            @if (Request::is('rekam-medis/trashed'))
+
+                                                {{-- restore --}}
+                                                {{-- <a href="/rekam-medis/restore/{{ $rm->id }}" class="btn btn-success"><i class="fas fa-undo"></i></a> --}}
+                                                <form action="/rekam-medis/restore/{{ $rm->id }}" method="post" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-success border-0" onclick="return confirm('Upps, Yakin mau pulihkan data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                        {{-- <i class="fas fa-undo"></i> --}}
+                                                        <i class="fas fa-recycle"></i>
+                                                    </button>
+                                                    {{-- <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien->pasien_nama}} ?')"><i class="fas fa-trash-alt"></i></button> --}}
+                                                </form> 
+                                            @else
+                                                {{-- edit --}}
+                                                <a href="/rekam-medis/edit/{{ $rm->id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+
+                                                {{-- delete sementara --}}
+                                                <form action="/rekam-medis/hapus-sementara/{{ $rm->id }}" method="post" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        {{-- <i class="fa-solid fa-trash-clock"></i> --}}
+                                                    </button>
+                                                    {{-- <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien->pasien_nama}} ?')"><i class="fas fa-trash-alt"></i></button> --}}
+                                                </form>                                                
+                                            @endif
+
+                                            {{-- delete permanen --}}
+                                            <form action="/rekam-medis/hapus-permanen/{{ $rm->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien->pasien_nama}} ?')"><i class="fas fa-trash-alt"></i></button>
-                                            </form>
+                                                <button class="btn btn-danger border-0 bg-{{ Request::is('rekam-medis/trashed') ? "danger" : "dark" }}" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                    {{-- <i class="fa-solid fa-trash text-light"></i> --}}
+                                                    <i class="fas fa-fire text-light"></i>
+                                                </button>
+                                                {{-- <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien->pasien_nama}} ?')"><i class="fas fa-trash-alt"></i></button> --}}
+                                            </form>                                                
                                         </td>
                                     </tr>
                                 @endforeach
