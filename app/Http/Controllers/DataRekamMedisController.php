@@ -24,7 +24,8 @@ class DataRekamMedisController extends Controller
      */
     public function index()
     {
-        $datas = DB::select('select * from data_rekam_medis where deleted_at is NULL',);
+       $datas = DB::select('select * from data_rekam_medis rm inner join dokters d on rm.dokter_id = d.dokter_id inner join pasiens p on rm.pasien_id = p.pasien_id where rm.deleted_at is NULL');
+        // $datas = DB::select('select * from data_rekam_medis ',);
         // $datas = DB::table('data_rekam_medis')->whereNull('data_rekam_medis.deleted_at')->get();
         // dd($datas);
         // $datas = DB::select('SELECT * FROM data_rekam_medis rm
@@ -87,10 +88,13 @@ class DataRekamMedisController extends Controller
      * @param  \App\Models\DataRekamMedis  $dataRekamMedis
      * @return \Illuminate\Http\Response
      */
-    public function show(DataRekamMedis $dataRekamMedis)
+    // public function show(DataRekamMedis $dataRekamMedis)
+    public function show($rm)
     {
+        $data = DB::select('select * from data_rekam_medis rm inner join dokters d on rm.dokter_id = d.dokter_id inner join pasiens p on rm.pasien_id = p.pasien_id where rm.id = ?',[$rm])[0];
+        // dd($data->pasien_nama);
         return view('informasi-medis.rekam-medis.show', [
-            'dataRekamMedis' => $dataRekamMedis,
+            'dataRekamMedis' => $data,
         ]);
     }
 
@@ -199,7 +203,8 @@ class DataRekamMedisController extends Controller
     {
         // $datas = DB::select('select * from data_rekam_medis data_rekam_medis inner join pasiens pasiens ON pasiens.pasien_id = data_rekam_medis.pasien_id inner join dokters dokters ON  dokters.dokter_id = data_rekam_medis.dokter_id')->whereNotNull('data_rekam_medis.deleted_at');
         // $datas = DB::select('select * from data_rekam_medis ');
-        $datas = DB::select('select * from data_rekam_medis where deleted_at is NOT NULL');
+        // $datas = DB::select('select * from data_rekam_medis where deleted_at is NOT NULL');
+       $datas = DB::select('select * from data_rekam_medis rm inner join dokters d on rm.dokter_id = d.dokter_id inner join pasiens p on rm.pasien_id = p.pasien_id where rm.deleted_at is NOT NULL');
 
         // $datas = DB::table('data_rekam_medis')->whereNotNull('data_rekam_medis.deleted_at')->get();
         // dd($datas);

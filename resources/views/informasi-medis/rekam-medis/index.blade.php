@@ -10,7 +10,7 @@
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800 font-weight-bold"><i class="fas fa-poll-h"></i> Data Rekam Medis</h1>
+                <h1 class="h3 mb-0 text-gray-800 font-weight-bold"><i class="fas fa-poll-h"></i> Data Rekam Medis @if (Request::is('rekam-medis/trashed')) Terhapus @endif </h1>
                 <div class="d-flex mb-2 justify-content-end">
                     @if (Request::is('rekam-medis')) 
                         <a href="/rekam-medis/create" class="btn btn-success btn-icon-split">
@@ -84,14 +84,14 @@
                                         <td>{{ $rm->created_at }}</td>
                                         {{-- <td>{{ DB::select('select pasien_nama from pasiens where pasien_id = :pasien_id',['pasien_id' => '1']) }}</td> --}}
                                         {{-- <td>{{ $rm->pasien->pasien_nama }}</td> --}}
-                                        <td>{{ $rm->pasien_id }}</td>
+                                        <td>{{ $rm->pasien_nama }}</td>
                                         <td>{{ $rm->keluhan }}</td>
-                                        <td>{{ $rm->dokter_id }}</td>
+                                        <td>{{ $rm->dokter_nama }}</td>
                                         {{-- <td>{{ $rm->dokter->dokter_nama }}</td> --}}
                                         <td>{{ $rm->diagnosis }}</td>
                                         <td class="col-md-3">
                                             
-                                            <a href="/rekam-medis/{{ $rm->id }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/rekam-medis/{{ $rm->id }}" class="btn btn-info" title="Lihat Data"><i class="fas fa-eye"></i></a>
                                             @if (Request::is('rekam-medis/trashed'))
 
                                                 {{-- restore --}}
@@ -99,7 +99,7 @@
                                                 <form action="/rekam-medis/restore/{{ $rm->id }}" method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-success border-0" onclick="return confirm('Upps, Yakin mau pulihkan data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                    <button class="btn btn-success border-0" onclick="return confirm('Upps, Yakin mau pulihkan data rekam medis dari {{$rm->pasien_id}} ?')" title="Pulihkan data">
                                                         {{-- <i class="fas fa-undo"></i> --}}
                                                         <i class="fas fa-recycle"></i>
                                                     </button>
@@ -107,7 +107,7 @@
                                                 </form> 
                                             @else
                                                 {{-- edit --}}
-                                                <a href="/rekam-medis/edit/{{ $rm->id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                <a href="/rekam-medis/edit/{{ $rm->id }}" class="btn btn-warning"><i class="fas fa-edit" title="Ubah data"></i></a>
 
                                                 {{-- delete sementara --}}
                                                 <form action="/rekam-medis/hapus-sementara/{{ $rm->id }}" method="post" class="d-inline">
@@ -125,7 +125,7 @@
                                             <form action="/rekam-medis/hapus-permanen/{{ $rm->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger border-0 bg-{{ Request::is('rekam-medis/trashed') ? "danger" : "dark" }}" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                <button class="btn btn-danger border-0 bg-{{ Request::is('rekam-medis/trashed') ? "danger" : "dark" }}" onclick="return confirm('Upps, Yakin mau hapus permanen data rekam medis dari {{$rm->pasien_id}} ?')" title="Hapus permanen">
                                                     {{-- <i class="fa-solid fa-trash text-light"></i> --}}
                                                     <i class="fas fa-fire text-light"></i>
                                                 </button>

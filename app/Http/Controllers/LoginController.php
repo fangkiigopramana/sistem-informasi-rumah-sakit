@@ -36,6 +36,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success','Yee, kamu sudah keluar. Sampai ketemu lagi.');
     }
 }

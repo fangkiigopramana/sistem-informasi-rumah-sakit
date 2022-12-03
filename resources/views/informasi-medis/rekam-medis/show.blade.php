@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nama" name="nama" value="{{ $dataRekamMedis->pasien->pasien_nama }}" readonly>
+                                <input type="text" class="form-control" id="nama" name="nama" value="{{ $dataRekamMedis->pasien_nama }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <label for="namaDokter" class="col-sm-3 col-form-label">Nama Pemeriksa</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="namaDokter" name="namaDokter" value="{{ $dataRekamMedis->dokter->dokter_nama }}" readonly>
+                                <input type="text" class="form-control" id="namaDokter" name="namaDokter" value="{{ $dataRekamMedis->dokter_nama }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
