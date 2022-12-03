@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -21,8 +22,14 @@ class RegisterController extends Controller
             'password' => 'required|min:8|max:255'
         ]);
         $validatedData['password'] = bcrypt($validatedData['password']);
-
-        User::create($validatedData);
+        // dd('masuk');
+        DB::insert('INSERT INTO  users(name, username, email, password) VALUES(? ,?, ?, ?)',[
+            $validatedData['name'],
+            $validatedData['username'],
+            $validatedData['email'],
+            $validatedData['password'],
+        ]);
+        // User::create($validatedData);
 
         return redirect('/login')->with('success', 'Yee, Registrasi Berhasil!!');
     }

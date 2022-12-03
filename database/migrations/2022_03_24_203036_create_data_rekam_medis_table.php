@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('keluhan');
             $table->foreignIdFor(Dokter::class,'dokter_id');
             $table->string('diagnosis');
+            // $table->timestamp('deleted_at');
             $table->softDeletes();
             $table->timestamps();
         });

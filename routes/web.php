@@ -73,9 +73,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/contoh-doang', function(){
-    dd(Route::currentRouteName());
-});
 
 // Data Rekam Medis
 // Route::get('/rekam-medis/trashed', function () {
