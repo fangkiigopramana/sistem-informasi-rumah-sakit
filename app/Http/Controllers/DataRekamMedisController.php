@@ -210,8 +210,25 @@ class DataRekamMedisController extends Controller
     public function print(DataRekamMedis $dataRekamMedis)
     {
         // $dataRekamMedis = DataRekamMedis::all();
-        DB::select('select * from data_rekam_medis');
-        return view('informasi-medis.rekam-medis.print',['dataRekamMedis'=>$dataRekamMedis]);
+        // DB::select('select * from data_rekam_medis');
+        $datas = DB::select('
+        select 
+             rm.id AS id, rm.keluhan AS keluhan, rm.diagnosis AS diagnosis, rm.created_at AS created_at, d.dokter_nama AS dokter_nama, p.pasien_nama AS pasien_nama
+        from 
+             data_rekam_medis rm 
+        inner join 
+             dokters d 
+         on
+             rm.dokter_id = d.dokter_id 
+         inner join 
+             pasiens p 
+         on 
+             rm.pasien_id = p.pasien_id 
+         where 
+             rm.deleted_at is NULL
+         ');
+        //  dd($datas);
+        return view('informasi-medis.rekam-medis.print',['dataRekamMedis'=>$datas]);
     }
 
     public function trashed()

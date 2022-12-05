@@ -39,13 +39,13 @@
                         </span>
                         <span class="text">Data Terhapus</span>
                     </a>
-                    @endif
                     <a href="/rekam-medis/cetak" target="_blank" class="btn btn-danger btn-icon-split ml-2">
                         <span class="icon text-white-50">
                             <i class="fas fa-print"></i>
                         </span>
                         <span class="text">Cetak Laporan</span>
                     </a>
+                    @endif
                 </div>
             </div>
             <nav class="col-md-4" aria-label="breadcrumb">

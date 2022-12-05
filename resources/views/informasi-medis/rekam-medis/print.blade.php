@@ -32,9 +32,9 @@
                 @foreach ($dataRekamMedis as $drm)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$drm->pasien->pasien_nama}}</td>
+                    <td>{{$drm->pasien_nama}}</td>
                     <td>{{$drm->keluhan}}</td>
-                    <td>{{$drm->dokter->dokter_nama}}</td>
+                    <td>{{$drm->dokter_nama}}</td>
                     <td>{{$drm->diagnosis}}</td>
                     <td>{{$drm->created_at}}</td>
                 </tr>

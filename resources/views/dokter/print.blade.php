@@ -28,21 +28,19 @@
                 <th scope="col">Alamat</th>
                 <th scope="col">Nomor Telpon</th>
                 <th scope="col">Email</th>
-                <th scope="col">Terdaftar Pada Tanggal</th>
               </tr>
             </thead>
             <tbody>
                 @foreach ($dokter as $d)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$d->nama}}</td>
+                    <td>{{$d->dokter_nama}}</td>
                     <td>{{$d->spesialis}}</td>
                     <td>{{$d->umur}}</td>
-                    <td>{{$d->jenisKelamin}}</td>
+                    <td>{{$d->jenis_kelamin}}</td>
                     <td>{{$d->alamat}}</td>
-                    <td>{{$d->noTelepon}}</td>
+                    <td>{{$d->no_telepon}}</td>
                     <td>{{$d->email}}</td>
-                    <td>{{$d->created_at}}</td>
                 </tr>
                 @endforeach
             </tbody>
