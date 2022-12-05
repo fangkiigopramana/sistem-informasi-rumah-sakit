@@ -99,7 +99,7 @@
                                                 <form action="/rekam-medis/restore/{{ $rm->id }}" method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-success border-0" onclick="return confirm('Upps, Yakin mau pulihkan data rekam medis dari {{$rm->pasien_id}} ?')" title="Pulihkan data">
+                                                    <button class="btn btn-success border-0" onclick="return confirm('Upps, Yakin mau pulihkan data rekam medis dari {{$rm->pasien_nama}} ?')" title="Pulihkan data">
                                                         {{-- <i class="fas fa-undo"></i> --}}
                                                         <i class="fas fa-recycle"></i>
                                                     </button>
@@ -113,7 +113,7 @@
                                                 <form action="/rekam-medis/hapus-sementara/{{ $rm->id }}" method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus data rekam medis dari {{$rm->pasien_id}} ?')">
+                                                    <button class="btn btn-danger border-0" onclick="return confirm('Upps, Yakin mau hapus sementara data rekam medis dari {{$rm->pasien_nama}} ?')">
                                                         <i class="fas fa-trash-alt"></i>
                                                         {{-- <i class="fa-solid fa-trash-clock"></i> --}}
                                                     </button>
@@ -125,7 +125,7 @@
                                             <form action="/rekam-medis/hapus-permanen/{{ $rm->id }}" method="post" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger border-0 bg-{{ Request::is('rekam-medis/trashed') ? "danger" : "dark" }}" onclick="return confirm('Upps, Yakin mau hapus permanen data rekam medis dari {{$rm->pasien_id}} ?')" title="Hapus permanen">
+                                                <button class="btn btn-danger border-0 bg-{{ Request::is('rekam-medis/trashed') ? "danger" : "dark" }}" onclick="return confirm('Upps, Yakin mau hapus permanen data rekam medis dari {{$rm->pasien_nama}} ?')" title="Hapus permanen">
                                                     {{-- <i class="fa-solid fa-trash text-light"></i> --}}
                                                     <i class="fas fa-fire text-light"></i>
                                                 </button>

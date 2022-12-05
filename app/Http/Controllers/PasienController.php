@@ -151,7 +151,7 @@ class PasienController extends Controller
 
     public function print(Pasien $pasien)
     {
-        DB::select('select * from pasiens');
+        $pasien = DB::select('select * from pasiens');
         return view('pasien.print', [
             'pasien' => $pasien
         ]);

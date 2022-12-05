@@ -13,9 +13,11 @@ class DashboardController extends Controller
     public function show()
     {
         // $countPasien = DB::select('select count(*) as sum from pasiens');
-        $countPasien = Pasien::get()->count();
-        $countDokter = Dokter::get()->count();
-        $countRekamMedis = Dokter::get()->count();
+        $countPasien = DB::select('SELECT COUNT(*) AS count FROM pasiens')[0]->count;
+        $countDokter = DB::select('SELECT COUNT(*) AS count FROM dokters')[0]->count;
+        $countRekamMedis = DB::select('SELECT COUNT(*) AS count FROM data_rekam_medis')[0]->count;
+        // $countDokter = Dokter::get()->count();
+        // $countRekamMedis = Dokter::get()->count();
 
         $pasienPria =  Pasien::where('jenis_kelamin', 'Laki-Laki')->get()->count();
         $pasienPerempuan =  Pasien::where('jenis_kelamin', 'Perempuan')->get()->count();
@@ -27,7 +29,7 @@ class DashboardController extends Controller
 
         $jenisKelaminPria = $dokterPria;
         $jenisKelaminPerempuan = $dokterPerempuan;
-        // dd($countPasien);
+        // dd($countRekamMedis);
         return view('dashboard.index', 
         compact('full_name','countRekamMedis','countPasien', 'countDokter', 'jenisKelaminPria', 'jenisKelaminPerempuan')
     );

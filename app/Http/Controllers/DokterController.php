@@ -133,7 +133,7 @@ class DokterController extends Controller
         // $validatedData['slug'] = Str::slug($validatedData['nama'], '-');
 
         DB::update('update dokters set dokter_nama = :dokter_nama, spesialis = :spesialis, umur = :umur, jenis_kelamin = :jenis_kelamin, no_telepon = :no_telepon, alamat = :alamat, email = :email where dokter_id = :dokter_id',[
-            'dokter_id' => $request->dokter_id,
+            'dokter_id' => $dokter->dokter_id,
             'dokter_nama' => $request->dokter_nama,
             'spesialis' => $request->spesialis,
             'umur' => $request->umur,
